@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: runs-and-switches-models
+expected_outcome: |
+  The skill writes a two-phase plan folder (Haiku inventory, then Sonnet docs, both at low effort)
+  and runs it without asking between phases: phase 1 runs as an agent or headless session on Haiku,
+  then phase 2 on Sonnet. Both reports begin "Status: done", RUN-LOG.md has one row per phase, the
+  inventory lists the five functions in src/todo.py with line numbers, docs/functions.md has one
+  line per function, and nothing is committed.
+context:
+  scaffold_script: place-files.sh

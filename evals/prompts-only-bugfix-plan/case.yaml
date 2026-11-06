@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: prompts-only-bugfix-plan
+expected_outcome: |
+  A plan folder with a README (goal, phase table giving each phase's model, effort and the reason
+  for the choice, the standing rules, and one terminal command per phase) and at least two phase
+  files. The find-causes phase and the fix phase use different models. Every phase file has front
+  matter (model, effort, gate, report), copies both of the user's rules, says that nothing is to be
+  pushed, and tells its agent where to write a report whose first line is a status. Nothing outside
+  the plan folder is changed and no phase is run.
+context:
+  scaffold_script: place-files.sh
