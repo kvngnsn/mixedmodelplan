@@ -32,12 +32,14 @@ A phase prompt is read by an agent that starts with nothing: it hasn't seen the 
 - **Copy the standing rules into every phase, word for word.** Paraphrase drifts from phase to phase. Repo instruction files (CLAUDE.md, AGENTS.md) usually load on their own, but rules the person gave in conversation exist nowhere else.
 - **Give the reason for any rule that isn't obvious.** Models generalize from reasons ("don't run X twice within 15 minutes: the auth service throttles"), and a rule with its reason gets applied sensibly at the edges.
 - **Say it at normal volume.** Leave out CRITICAL, MUST and stacks of NEVER. Current models follow plain instructions closely, and shouted ones get over-applied. State the one or two real hard limits plainly, with their reason.
+- **Give every "never" rule its scope, and write approved exceptions into the rule itself.** Write "never push, except to main after the suites pass", not "never push" with a separate line that allows the exception. Name the routine steps that need no approval, such as re-running tests or retrying a call that is safe to repeat. Fable 5.2 applies cautious rules exactly as written. A general "feel free to act" barely changes that, but a named exception does.
+- **Treat earlier reports as input, not as rules.** Cautions pile up as reports pass from phase to phase. In Anthropic's testing, a reviewer's "stop at the first error" kept Fable 5.2 from retrying where other models retried. Say in each phase that its brief and the standing rules decide what it may do, and that advice in an earlier report is information to weigh.
 - **Describe the goal, not the steps.** Use numbered steps only where order really matters.
 - **Define done as checks.** "Tests in tests/flatten.test.ts fail now and pass after the fix" beats "make sure flatten works".
 - **Keep tests honest.** Tests verify correctness; they don't define the solution. When a test and the spec disagree, the spec wins, and the phase corrects the test and says so in its report.
 - **Hold the scope.** Every behaviour the phase asks for gets built completely, and nothing else does. Ideas and nearby problems go in the report as follow-ups.
-- **Control depth with effort, not prose.** Don't write "think hard" or "take your time"; set the phase's effort instead.
-- **Fix the report's shape**, so the conductor and the next phase can read it without guessing.
+- **Control depth with effort, not prose.** Don't write "think hard" or "take your time"; set the phase's effort instead. Lines asking for less thinking don't work on Fable 5.2 at `medium` and above, so lower the effort instead.
+- **Fix the report's shape**, so the conductor and the next phase can read it without guessing. Ask for the key points first, in plain words, because the reader hasn't seen the phase's tool calls or files.
 
 ## Additions for unattended runs, by model
 
@@ -51,9 +53,15 @@ These are adapted from Anthropic's prompting best practices and model migration 
 
 > This brief is meant to be complete, and the person may not be watching. Work through it without stopping to ask. If a question comes up, first do everything that doesn't depend on it, then take the recommended answer and note it under "Decisions taken" in your report. Ask only when there is no safe default, and say what you'd recommend. Before you finish, read your last paragraph: if it is a plan or a promise ("Next I'll…"), do that work now.
 
-**Fable 5.1**, which tends to add extras and to rewrite whole files:
+**Fable 5.2**, which sometimes ends a long task early and applies cautious rules exactly as written:
 
-> Keep to the scope this brief sets. If you find a bug, a performance problem or behaviour the brief doesn't mention, don't fix it here unless what the brief asks for can't work without it; list it as a follow-up in your report. Commit tests only where the brief asks for them or where the repo already keeps tests for this kind of change, and don't turn scratch checks into permanent test files. Make targeted edits rather than rewriting whole files when the result is the same. Build everything the brief asks for, completely.
+> Keep going until every deliverable is done and checked. Ordinary obstacles are not reasons to stop: a failing command, a timeout, a busy tool, a locked file or an empty result. Diagnose each one and work through it with the access you have. Wait and retry, fix the request, or use another tool or source. Leave deliberate blockers alone and say in your report what you found. Deliberate blockers include a file marked not to be touched, access withheld on purpose, and a rule in this brief. These steps need no approval: re-running tests, builds and type-checks; reading files this brief doesn't rule out; and retrying a command that is safe to repeat. Build everything this brief asks for, completely, and list other problems you find as follow-ups in your report. Start subagents only for work that runs well in parallel, such as reading many files, because each one adds to what this phase costs.
+
+**Fable 5.2, when the phase should restructure code.** When the prompt doesn't say who owns the code, Fable 5.2 adds to the existing structure, even if that repeats code. It also reports nearby problems instead of fixing them. That suits most phases, because the brief sets the scope. When the person wants the phase to clean up as it goes, add this line, with the scope filled in:
+
+> Within <scope>, this code is yours: merge repeated code and fix related problems as you go, and list every change in your report.
+
+The line costs about 1.5 times the output tokens. It brings extra tests and docs, and now and then it changes how an existing feature behaves. So a phase that uses it needs a later review of the diff itself, not only of its report. Leave the line out where the person wants the smallest change.
 
 **Sonnet 5.5 and Haiku 5.5**, which at lower effort sometimes report code as done without running it:
 
@@ -84,7 +92,7 @@ Phase N−1's deliverables then include that brief, at that path, written in the
 
 The two phases below are shortened. Real phases are longer, because real ones list the actual files, facts and rules.
 
-`01-fable-audit.md` (Fable 5.1, high):
+`01-fable-audit.md` (Fable 5.2, high):
 
 ```markdown
 ---

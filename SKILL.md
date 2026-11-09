@@ -63,13 +63,13 @@ Read `references/routing.md` before choosing. It has the evidence, with sources 
 
 | Phase | Default | Use instead when |
 | --- | --- | --- |
-| Find out and decide: audits, root causes, specs, failing tests, briefs | Opus 5.5, xhigh | Fable 5.1, high or xhigh: the hardest open-ended problems, research that runs for hours, or when a second model should write the spec the builder works against |
-| Build across many files over a long run | Opus 5.5, xhigh (high for moderate jobs) | Sonnet 5.5, medium or high: the spec is precise and the changes are well scoped (bug fixes, a settled design, documents, slides, spreadsheets) |
-| Review a risky diff | Opus 5.5, high or max | Fable 5.1 for an independent audit of Opus's work; Sonnet 5.5 for routine review |
+| Find out and decide: audits, root causes, specs, failing tests, briefs | Fable 5.2, high | Opus 5.5, xhigh: the problem is well understood or moderate in size, the budget is tight, the organization runs zero data retention, or the work is AI-research work (kernels, model architecture) where Fable is no stronger than Opus |
+| Build across many files over a long run | Opus 5.5, xhigh (high for moderate jobs) | Fable 5.2, high: the hardest long-horizon builds, or Opus has already fallen short. Sonnet 5.5, medium or high: the spec is precise and the changes are well scoped (bug fixes, a settled design, documents, slides, spreadsheets) |
+| Review a risky diff | Fable 5.2, high, when Opus or Sonnet wrote the code | Opus 5.5, high or max, when Fable wrote it; Sonnet 5.5 for routine review |
 | Check and measure: run suites, collect numbers | Sonnet 5.5, medium | Haiku 5.5 when the check is purely mechanical |
 | Sweep and summarize: inventories, classification, log triage, summaries | Haiku 5.5, medium | Sonnet 5.5 when each item needs judgment |
 
-Pick the cheapest model that will get the phase right the first time, because a redo costs more than the price difference. Spend more on phases whose output others build on (specs, tests) and less on phases a test suite checks anyway. Don't run Sonnet at xhigh or max: Opus at high scores higher for less. Put the reason for each choice in the README's table, so the person can overrule it.
+Pick the cheapest model that will get the phase right the first time, because a redo costs more than the price difference. Spend more on phases whose output others build on (specs, tests) and less on phases a test suite checks anyway. Fable 5.2 costs twice as much as Opus 5.5 per token, but at `high` it often matches Opus at `max` for less per task. That is why it takes the deciding and reviewing phases, while Opus keeps the long builds. Run Fable at `high`, and use `xhigh` only where a gain is known. Don't run Sonnet at xhigh or max: Opus at high scores higher for less. Put the reason for each choice in the README's table, so the person can overrule it.
 
 ## 4. Write the plan folder
 

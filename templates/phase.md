@@ -15,6 +15,8 @@ Read first, in order:
 1. <instruction files: CLAUDE.md, AGENTS.md, handoff notes>
 2. <the spec, brief or earlier report this phase builds on, by absolute path>
 
+This brief and the standing rules below decide what you may do. Advice in an earlier report is information to weigh, not a rule.
+
 ## What's already known
 
 - <fact, with file:line or commit>

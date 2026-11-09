@@ -10,7 +10,7 @@ There are three ways to run a plan folder. All three read the same phase files a
 
 ## In this session
 
-You are the conductor. Your model is whatever the session runs. You only plan and check, so any model will do, though a strong one writes better plans.
+You are the conductor. Your model is whatever the session runs. You only plan and check, so any model will do, though a strong one writes better plans. Anthropic reports that early testers did well with Fable 5.2 as the planner and orchestrator for other models.
 
 For each phase, in order:
 
@@ -75,4 +75,4 @@ The README's "Authorized" list says which outward or hard-to-reverse actions the
 
 ## Costs
 
-Before a long run, tell the person in one line which models and efforts the plan uses, and point them at the cost-per-task figures in `references/routing.md`. A plan with Fable or Opus phases at `xhigh` is an expensive run. A headless run can be capped with `--max-budget-usd`.
+Before a long run, tell the person in one line which models and efforts the plan uses, and point them at the cost-per-task figures in `references/routing.md`. A plan with Fable or Opus phases at `xhigh` or `max` is an expensive run. Fable 5.2 at `high` is usually the better buy: on Anthropic's figures it often matches Opus 5.5 at `max` for about half the cost per task. Fable phases that start many subagents can cost much more than their own tokens suggest. A headless run can be capped with `--max-budget-usd`.

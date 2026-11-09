@@ -24,17 +24,17 @@ plans/2026-11-05-ux-fixes/
 
 ## Which model for what
 
-`references/routing.md` has the evidence: Anthropic's launch benchmarks, the Artificial Analysis index by effort with cost per task, Vals AI and a code-review test, all checked on 2026-11-05. In short:
+`references/routing.md` has the evidence: Anthropic's launch benchmarks and cost-per-task comparisons, the Artificial Analysis index by effort, Vals AI and a code-review test. It was last checked on 2026-11-09, the day Claude Fable 5.2 came out. In short:
 
 | Phase | Default | Instead, when |
 | --- | --- | --- |
-| Audits, root causes, specs, failing tests | Opus 5.5, xhigh | Fable 5.1 for the hardest open-ended problems, research that runs for hours, or an independent second opinion on the spec Opus will build |
-| Long builds across many files | Opus 5.5, xhigh | Sonnet 5.5 at medium or high when the spec is precise and the changes are well scoped |
-| Review of risky changes | Opus 5.5, high or max | Fable 5.1 to audit Opus's own work; Sonnet 5.5 for routine review |
+| Audits, root causes, specs, failing tests | Fable 5.2, high | Opus 5.5 at xhigh when the problem is well understood or the budget is tight |
+| Long builds across many files | Opus 5.5, xhigh | Fable 5.2 at high for the hardest long-horizon builds; Sonnet 5.5 at medium or high when the spec is precise and the changes are well scoped |
+| Review of risky changes | Fable 5.2, high, when Opus built it | Opus 5.5 at high or max when Fable built it; Sonnet 5.5 for routine review |
 | Running checks, collecting numbers | Sonnet 5.5, medium | Haiku 5.5 when it's mechanical |
 | Inventories, classification, summaries | Haiku 5.5, medium | Sonnet 5.5 when each item needs judgment |
 
-Anthropic's own advice is that "most workloads start with Claude Opus 5.5". On every benchmark Anthropic published for both, Opus 5.5 scores above Fable 5.1, at 40% of the price per token. Opus at high effort also outscores Sonnet at xhigh for less money, which is why the skill doesn't push Sonnet above high.
+Fable 5.2 scores above Opus 5.5 on almost every benchmark Anthropic published for both models. It is also first on the Vals AI and Artificial Analysis indexes. It costs twice as much per token, but often not more per task. At high effort it reaches Opus 5.5's best FrontierCode score for about half the cost per task. On the Vals Index it cost $17.94 per test against Opus's $24.77. Anthropic still says most coding and knowledge work should start with Opus 5.5. So the skill gives Fable the short, high-leverage phases that everything else rests on: finding causes, writing the spec and tests, and reviewing the result. Opus keeps the long builds that a test suite checks anyway. Opus at high effort also outscores Sonnet at xhigh for less money, which is why the skill doesn't push Sonnet above high.
 
 ## Install
 
@@ -67,7 +67,7 @@ The headless runner needs `bash`, `jq` and the `claude` CLI.
 
 ## Sources
 
-The prompt guidance follows Anthropic's [prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) and model migration guide. The model routing cites Anthropic's launch pages for [Opus 5.5](https://www.anthropic.com/claude-opus-5-5), [Sonnet 5.5](https://www.anthropic.com/claude-sonnet-5-5) and [Haiku 5.5](https://www.anthropic.com/claude-haiku-5-5), the [Choosing a model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model) guide, [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models), [Vals AI](https://www.vals.ai/benchmarks) and [CodeRabbit](https://www.coderabbit.ai/blog/sonnet-5-5-model-review). Model lineups change every few months, so re-check `references/routing.md` when new models ship.
+The prompt guidance follows Anthropic's [prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) and model migration guide. The model routing cites Anthropic's launch pages for [Fable 5.2](https://www.anthropic.com/claude-fable-and-mythos-5-2), [Opus 5.5](https://www.anthropic.com/claude-opus-5-5), [Sonnet 5.5](https://www.anthropic.com/claude-sonnet-5-5) and [Haiku 5.5](https://www.anthropic.com/claude-haiku-5-5), the [Choosing a model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model) guide, [Prompting Claude Fable 5.2](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2), [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models), [Vals AI](https://www.vals.ai/benchmarks) and [CodeRabbit](https://www.coderabbit.ai/blog/sonnet-5-5-model-review). Model lineups change every few months, so re-check `references/routing.md` when new models ship.
 
 ## License
 

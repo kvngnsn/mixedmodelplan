@@ -10,7 +10,7 @@ Run in order. Each phase reads what the ones before it wrote.
 
 | # | File | Model | Effort | Why this model | What it does | Ends with | Gate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `01-<model>-<slug>.md` | Fable 5.1 | high | <reason, from references/routing.md> | <one line> | <deliverables, report> | none |
+| 1 | `01-<model>-<slug>.md` | Fable 5.2 | high | <reason, from references/routing.md> | <one line> | <deliverables, report> | none |
 | 2 | `02-<model>-<slug>.md` | Opus 5.5 | xhigh | <reason> | <one line> | <deliverables, report> | none |
 
 ## Authorized
